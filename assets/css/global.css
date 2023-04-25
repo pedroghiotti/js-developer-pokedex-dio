@@ -1,10 +1,28 @@
 * {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-body {
+*::-webkit-scrollbar
+{
+    display: none;
+}
+
+html, body
+{
+    height: 100%;
+    width: 100%;
+}
+body
+{
     background-color: #f6f8fc;
+}
+
+.hidden
+{
+    visibility: hidden;
 }
 
 .content {
@@ -15,10 +33,14 @@ body {
 }
 
 @media screen and (min-width: 992px) {
+    body
+    {
+        padding: 1rem;
+    }
     .content {
         max-width: 992px;
         height: auto;
-        margin: 1rem auto;
+        margin: 0 auto;
         border-radius: 1rem;
     }
 }

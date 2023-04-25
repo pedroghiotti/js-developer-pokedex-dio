@@ -1,8 +1,10 @@
-const pokemonList = document.getElementById('pokemonList')
-const loadMoreButton = document.getElementById('loadMoreButton')
+const pokemonList = document.getElementById('pokemonList');
+const loadMoreButton = document.getElementById('loadMoreButton');
+const detailView = document.getElementById('detailView');
+const detailViewReturnButton = document.getElementById('detailViewReturnButton');
 
-const maxRecords = 151
-const limit = 10
+const maxRecords = 151;
+const limit = 10;
 let offset = 0;
 
 function convertPokemonToLi(pokemon) {
@@ -22,26 +24,52 @@ function convertPokemonToLi(pokemon) {
         </li>
     `
 }
-
-function loadPokemonItens(offset, limit) {
-    pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-        const newHtml = pokemons.map(convertPokemonToLi).join('')
-        pokemonList.innerHTML += newHtml
-    })
+function convertPokemonToDetailedLi(pokemon) {
+    return `
+        <div class="listedDetails ${pokemon.type}">
+            <span class="name">${pokemon.name}</span>
+            <img src="${pokemon.photo}" alt="">
+        </div>
+    `
+}
+function UpdatePokemonEventListeners()
+{
+    const addedPokemon = document.querySelectorAll('.pokemon');
+    for(let i = 0; i < addedPokemon.length; i++)
+    {
+        addedPokemon[i].addEventListener('click', () => OpenDetailedView(addedPokemon[i]));
+    }
+}
+function OpenDetailedView(pokemon)
+{
+    detailedView.OpenOnId(Number(pokemon.querySelector('.number').innerText.replace('#', '')));
 }
 
-loadPokemonItens(offset, limit)
+function loadPokemonItems(offset, limit) {
+    pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+        const newPokemonListHtml = pokemons.map(convertPokemonToLi).join('');
+        const newPokemonDetailedHtml = pokemons.map(convertPokemonToDetailedLi).join('');
+        pokemonList.innerHTML += newPokemonListHtml;
+        detailedView.pokemonList.innerHTML += newPokemonDetailedHtml;
+        UpdatePokemonEventListeners();
+    });
+}
 
-loadMoreButton.addEventListener('click', () => {
+function loadFurtherPokemon()
+{
     offset += limit
     const qtdRecordsWithNexPage = offset + limit
 
     if (qtdRecordsWithNexPage >= maxRecords) {
         const newLimit = maxRecords - offset
-        loadPokemonItens(offset, newLimit)
+        loadPokemonItems(offset, newLimit)
 
         loadMoreButton.parentElement.removeChild(loadMoreButton)
     } else {
-        loadPokemonItens(offset, limit)
+        loadPokemonItems(offset, limit)
     }
-})
+}
+
+loadMoreButton.addEventListener('click', loadFurtherPokemon);
+
+loadPokemonItems(offset, limit);

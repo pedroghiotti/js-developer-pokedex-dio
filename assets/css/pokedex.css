@@ -146,6 +146,115 @@
     border-radius: 1rem;
 }
 
+#detailView
+{
+    position: fixed;
+    bottom: 0;
+    top:0;
+    right:0;
+    left:0;
+    overflow: hidden;
+}
+#detailViewPokemonList
+{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-inline: contain;
+}
+#detailViewIdList
+{
+    position: absolute;
+    top: 1.6rem;
+    left: 25%;
+    height: fit-content;
+    width: 50%;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(100%/9);
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-inline: contain;
+
+    color: white;
+    text-align: center;
+}
+#detailViewIdPrev, #detailViewIdNext
+{
+    position: absolute;
+    top: 1.3rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url('../images/arrow-left.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#detailViewIdPrev{
+    left:21%;
+}
+#detailViewIdNext{
+    right:21%;
+    transform: scaleX(-1);
+}
+.listedId .listedIdFiller
+{
+    scroll-snap-align: start;
+}
+.listedDetails
+{
+    position: relative;
+    scroll-snap-align: center;
+}
+.listedDetails .name
+{
+    position: absolute;
+
+    top: 45%;
+    left: 40%;
+
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 8rem;
+    color: rgba(255, 255, 255, .25);
+
+    transform: translate(-50%, -50%) rotate(-5deg);
+
+    user-select: none;
+}
+.listedDetails img
+{
+    position: absolute;
+
+    top: 45%;
+    left: 40%;
+
+    width: 25%;
+    height: auto;
+
+    transform: translate(-50%, -50%);
+}
+
+#detailViewReturnButton
+{
+    z-index: 1;
+    
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url('../images/arrow-left.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 @media screen and (min-width: 380px) {
     .pokemons {
         grid-template-columns: 1fr 1fr;
