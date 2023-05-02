@@ -10,7 +10,7 @@ let currPokemonId = 1;
 detailedView.ScrollToId = (id) => {
   currPokemonId = id;
 
-  if (currPokemonId >= offset + limit - 1) loadFurtherPokemon();
+  if (currPokemonId >= offset + limit - 1) requestLoadPokemon();
 
   const pageElementWidth =
     detailedView.pokemonList.getBoundingClientRect().width; // Largura do elemento de detalhes.
