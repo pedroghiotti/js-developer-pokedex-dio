@@ -17,6 +17,7 @@ body {
 body {
   background-color: #141414;
   color: white;
+  overflow-inline: hidden;
 }
 
 .hidden {
@@ -38,6 +39,7 @@ body {
   right: -17%;
   transform: rotate(20deg);
   opacity: 30%;
+  
 }
 
 @media screen and (min-width: 992px) {
