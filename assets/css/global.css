@@ -18,6 +18,7 @@ body {
   background-color: #141414;
   color: white;
   overflow-inline: hidden;
+  overflow-x: hidden;
 }
 
 .hidden {
