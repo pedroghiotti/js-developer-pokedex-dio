@@ -66,13 +66,26 @@
 .listedDetails .name {
   position: absolute;
 
+  width: fit-content;
+  height: fit-content;
+
+  inset: 0;
+  margin: auto;
+
+  bottom: -20%;
+  text-transform: capitalize;
+  color: white;
+  font-size: 2rem;
+
+  user-select: none;
+}
+.listedDetails .bgName {
+  position: absolute;
+
   top: 40%;
   left: 50%;
-
-  font-family: "Dela Gothic One", cursive;
   font-size: 10vw;
   color: rgba(255, 255, 255, 0.25);
-
   transform: translate(-50%, -50%) rotate(-5deg);
   text-transform: capitalize;
 
@@ -132,7 +145,6 @@
   border: 3px solid white;
 }
 .typeText {
-  font-family: "Dela Gothic One", cursive;
   color: white;
   line-height: 3rem;
   text-align: center;
@@ -156,7 +168,6 @@
   align-items: center;
 }
 .statName {
-  font-family: "Dela Gothic One", cursive;
   color: white;
   width: 3rem;
 }
@@ -199,8 +210,9 @@
   #detailViewIdNext {
     right: 5%;
   }
-  .listedDetails .name {
-    top: 60%;
-    transform: translate(-50%, -50%);
+  .listedDetails .bgName {
+    font-size: 20vw;
+    width: 100%;
+    text-align: center;
   }
 }

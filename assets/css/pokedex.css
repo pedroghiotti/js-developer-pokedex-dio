@@ -1,17 +1,30 @@
 .pokemons {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   margin: 0;
   padding: 0;
   list-style: none;
+  gap: 1rem;
 }
 
 .pokemon {
   display: flex;
   flex-direction: column;
-  margin: 0.5rem;
   padding: 1rem;
   border-radius: 1rem;
+
+  height: 25vh;
+
+  overflow: hidden;
+  position: relative;
+
+  transition: .1s;
+}
+.pokemon:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 5px black);
+  transition: .2s;
 }
 
 .pokemon .number {
@@ -51,8 +64,12 @@
 }
 
 .pokemon .detail img {
-  max-width: 100%;
-  height: 70px;
+  max-width: 50%;
+
+  max-height: 125%;
+
+  position: absolute;
+  right: 5%;
 }
 
 .pagination {
@@ -65,13 +82,20 @@
 }
 
 .pagination button {
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem 0;
-  font-size: 0.625rem;
-  color: #fff;
-  background-color: #6c79db;
+  position: relative;
+  height: 2rem;
+  width: 5rem;
+  background-color: rgba(255, 255, 255, 0.06125);
   border: none;
   border-radius: 1rem;
+  background-image: url("../images/ellipsis.svg");
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.pagination button:hover
+{
+  scale: 1.05;
 }
 
 @media screen and (min-width: 380px) {
@@ -83,11 +107,5 @@
 @media screen and (min-width: 576px) {
   .pokemons {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .pokemons {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

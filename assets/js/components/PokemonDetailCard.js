@@ -1,15 +1,6 @@
-// Optei por não utilizar shadow DOM nesse componente pois quero utilizar o CSS definido globalmente.
-
 class PokemonDetailCardComponent extends HTMLElement {
 
-    // Declaro variáveis onde serão guardadas as props do componente.
-    id;
-    name;
-    type;
-    type2;
-    spriteUrl;
-
-    types = [];
+    pokemonJson;
 
     constructor() {
         super();
@@ -21,7 +12,7 @@ class PokemonDetailCardComponent extends HTMLElement {
         this.append(this.buildHtml());
 
         // Nesse caso, preciso das classes no elemento raíz.
-        this.setAttribute('class', `listedDetails ${this.type}`)
+        this.setAttribute('class', `listedDetails ${this.pokemonJson.types[0]}`)
         
         // Monto um Mutation Observer que acionará o método updateComponent quando uma prop for alterada.
         this.mutationObserver = new MutationObserver(() => this.updateComponent());
@@ -29,19 +20,7 @@ class PokemonDetailCardComponent extends HTMLElement {
     }
 
     getProps() {
-        this.id = this.getAttribute('id');
-        this.name = this.getAttribute('name');
-        this.type = this.getAttribute('type');
-        this.type2 = this.getAttribute('type2');
-        this.spriteUrl = this.getAttribute('spriteUrl');
-
-        this.types = [];
-
-        this.types.push(this.type);
-
-        if(this.type2 === undefined) return;
-
-        this.types.push(this.type2);
+        this.pokemonJson = JSON.parse(this.getAttribute('pokemonJson'));
     }
 
     buildHtml() {
@@ -49,11 +28,12 @@ class PokemonDetailCardComponent extends HTMLElement {
 
         htmlComponent.innerHTML =
         `
-        <span class="name">${this.name}</span>
-        <img src="${this.spriteUrl}" alt="">
+        <span class="bgName">${this.pokemonJson.name.jp}</span>
+        <img src="${this.pokemonJson.spriteUrl}" alt="">
+        <span class="name">${this.pokemonJson.name.en}</span>
         <div class = "detailBlock">
             <div class="typesBlock">
-                ${this.types
+                ${this.pokemonJson.types
                 .map(
                     (type) => `<div class="typeDetailedView ${type}">
                 <div class="typeIcon ${type}Icon"></div>
@@ -67,8 +47,7 @@ class PokemonDetailCardComponent extends HTMLElement {
                     <span class = "statName">HP</span>
                     <span class = "statBar">
                         <div class="statSlider" style="width: ${
-                        // (pokemon.stats[0].base_stat / 255) * 100
-                        50
+                        (this.pokemonJson.stats.hp / 255) * 100
                         }%; background-color: #ff0000;"></div>
                     </span>
                 </div>
@@ -76,8 +55,7 @@ class PokemonDetailCardComponent extends HTMLElement {
                     <span class = "statName">Def</span>
                     <span class = "statBar">
                         <div class="statSlider" style="width: ${
-                        // (pokemon.stats[1].base_stat / 255) * 100
-                        100
+                        (this.pokemonJson.stats.atk / 255) * 100
                         }%; background-color: #F08030;"></div>
                     </span>
                 </div>
@@ -85,8 +63,7 @@ class PokemonDetailCardComponent extends HTMLElement {
                     <span class = "statName">Atk</span>
                     <span class = "statBar">
                         <div class="statSlider" style="width: ${
-                        // (pokemon.stats[2].base_stat / 255) * 100
-                        150
+                        (this.pokemonJson.stats.def / 255) * 100
                         }%; background-color: #F8D030;"></div>
                     </span>
                 </div>
@@ -94,8 +71,7 @@ class PokemonDetailCardComponent extends HTMLElement {
                     <span class = "statName">HP</span>
                     <span class = "statBar">
                         <div class="statSlider" style="width: ${
-                        // (pokemon.stats[3].base_stat / 255) * 100
-                        200
+                        (this.pokemonJson.stats.spAtk / 255) * 100
                         }%; background-color: #F85888;"></div>
                     </span>
                 </div>
@@ -103,8 +79,7 @@ class PokemonDetailCardComponent extends HTMLElement {
                     <span class = "statName">HP</span>
                     <span class = "statBar">
                         <div class="statSlider" style="width: ${
-                        // (pokemon.stats[4].base_stat / 255) * 100
-                        250
+                        (this.pokemonJson.stats.spDef / 255) * 100
                         }%; background-color: #78C850;"></div>
                     </span>
                 </div>
@@ -112,8 +87,7 @@ class PokemonDetailCardComponent extends HTMLElement {
                     <span class = "statName">HP</span>
                     <span class = "statBar">
                         <div class="statSlider" style="width: ${
-                        // (pokemon.stats[5].base_stat / 255) * 100
-                        300
+                        (this.pokemonJson.stats.spd / 255) * 100
                         }%; background-color: #F85888;"></div>
                     </span>
                 </div>

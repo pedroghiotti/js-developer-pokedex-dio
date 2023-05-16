@@ -12,25 +12,13 @@ function OpenDetailedView(id) {
 }
 
 function loadPokemon(offset, limit) {
-  pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+  pokeApi.fetchPokemonJsons(offset, limit).then((pokemons = []) => {
     pokemonList.insertAdjacentHTML('beforeend', pokemons.map((pokemon)=>{
-      return `<pokemon-card
-      name = "${pokemon.name}"
-      id = "${pokemon.number}"
-      type = "${pokemon.type}"
-      type2 = "${pokemon.types[1]}"
-      spriteUrl = "${pokemon.photo}"
-      ></pokemon-card>`;
+      return `<pokemon-card pokemonJson = ${pokemon}></pokemon-card>`;
     }).join(''));
 
     detailedView.pokemonList.insertAdjacentHTML('beforeend', pokemons.map((pokemon)=>{
-      return `<pokemon-detail-card
-      name = "${pokemon.name}"
-      id = "${pokemon.number}"
-      type = "${pokemon.type}"
-      type2 = "${pokemon.types[1]}"
-      spriteUrl = "${pokemon.photo}"
-      ></pokemon-detail-card>`;
+      return `<pokemon-detail-card pokemonJson = ${pokemon}></pokemon-detail-card>`;
     }).join(''));
   });
 }

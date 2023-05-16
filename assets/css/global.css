@@ -1,5 +1,5 @@
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Dela Gothic One", "Roboto", sans-serif;
   box-sizing: border-box;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -15,7 +15,8 @@ body {
   width: 100%;
 }
 body {
-  background-color: #f6f8fc;
+  background-color: #141414;
+  color: white;
 }
 
 .hidden {
@@ -26,7 +27,17 @@ body {
   width: 100vw;
   height: 100vh;
   padding: 1rem;
-  background-color: #fff;
+}
+
+.bgImgPokeball{
+  z-index: -1;
+  position: absolute;
+  width: 60%;
+  min-width: 300px;
+  top: -30%;
+  right: -17%;
+  transform: rotate(20deg);
+  opacity: 30%;
 }
 
 @media screen and (min-width: 992px) {
